@@ -1,0 +1,52 @@
+{
+  "name": "@abco/infinite-scroller",
+  "version": "0.0.0",
+  "description": "A component that can render inifinetely long list of items",
+  "author": "Akshay V R <akshayrakkanchath@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rakshay/InfiniteScroller"
+  },
+  "publishConfig": {
+    "registry": "https://npm.advisory.com"
+  },
+  "keywords": [
+    "InfiniteScroller",
+    ""
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.3.21",
+    "babel-loader": "^7.1.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.0.1",
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "node-sass": "^4.5.3",
+    "node-sass-import": "^1.0.0",
+    "npm-run-all": "^4.0.2",
+    "resets": "^1.0.9",
+    "sass-lint": "^1.4.0",
+    "vulcanize": "^1.15.4",
+    "webpack": "^3.7.1"
+  },
+  "scripts": {
+    "start": "npm run test:watch",
+    "lint": "npm-run-all lint:*",
+    "lint:js": "eslint src/*",
+    "lint:css": "sass-lint 'example/**/*.scss' -v",
+    "build": "npm-run-all build:js",
+    "build:example": "npm-run-all build:js:example build:css:example",
+    "build:js": "cross-env NODE_ENV=development babel src --out-dir dist",
+    "build:js:example": "cross-env NODE_ENV=development webpack --progress --color",
+    "buildDev:js:example": "cross-env NODE_ENV=development webpack --progress --watch --color",
+    "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
+    "buildDev:css:example": "node-sass example/index.scss example/index.build.css --watch --importer node_modules/node-sass-import",
+    "postversion": "git push --tags origin HEAD"
+  }
+}
