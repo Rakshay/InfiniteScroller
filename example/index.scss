@@ -49,3 +49,20 @@ header {
   flex: 1;
   overflow-y: scroll;
 }
+
+#message-list,
+.infinite-message-list {
+  height: 100%;
+}
+
+.infinite-message-list {
+  padding: 15px;
+}
+
+.infinite-list-item {
+  background-color: $white;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .27);
+  height: 149px;
+  margin: 0 auto 7px 0;
+}

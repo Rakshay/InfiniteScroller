@@ -19,7 +19,8 @@
   "dependencies": {
     "axios": "^0.16.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-infinite": "^0.12.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

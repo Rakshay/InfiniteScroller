@@ -6,5 +6,7 @@ import ReactDOM from 'react-dom';
 import InfiniteScroller from '../src';
 
 (() => {
-  ReactDOM.render(React.createElement(InfiniteScroller), document.getElementById('message-list'));
+  let messageListContainer = document.getElementById('message-list');
+
+  ReactDOM.render(React.createElement(InfiniteScroller), messageListContainer);
 })();
