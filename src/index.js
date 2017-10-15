@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import classnames from 'classnames';
 import InfiniteList from './infinite';
 
 const fetchMessage = (pageToken) => {
@@ -97,8 +98,10 @@ class InfiniteScroller extends React.Component {
   }
 
   render () {
+    let className = classnames('infinite-message-list', 'fill-height');
+
     return (
-      <div className="infinite-message-list" ref={(container) => {this.container = container;}}>
+      <div className={className} ref={(container) => {this.container = container;}}>
         {
           (() => {
             if (this.state.messages.length > 0) {

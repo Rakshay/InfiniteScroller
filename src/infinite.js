@@ -31,7 +31,7 @@ class InfiniteList extends React.Component {
 
     for (let i = start; i < end; i++) {
       let message = this.props.getMessage(i);
-      elements.push(<ListItem key={i} content={message.content}/>);
+      elements.push(<ListItem key={i} {...message} />);
     }
     return elements;
   }
