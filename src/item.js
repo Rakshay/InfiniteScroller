@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import Swipeable from 'react-swipeable'
 import classnames from 'classnames';
-// import SwipeToDelete from 'react-swipe-to-delete-component';
-
 
 class ListItem extends React.Component {
   constructor (props) {
@@ -20,22 +17,15 @@ class ListItem extends React.Component {
     this.swiped = (e, deltaX) => this._swiped(e, deltaX);
   }
 
-  _swiping(e, deltaX, deltaY, absX, absY, velocity) {
+  _swiping(e, deltaX) {
     this.setState({
       left: (deltaX * -1),
       isActive: true
     });
-    // console.log("You're Swiping ...", deltaX, deltaY)
   }
  
-  _swiped (e, deltaX, deltaY, isFlick, velocity) {
-    console.log('position', this.state.position.left);
-    console.log('width', this.state.position.width);
-    console.log('swipe', (deltaX * -1));
-    console.log("You Swiped...", e, deltaX, deltaY, isFlick, velocity);
-
-    if ((deltaX * -1) >= (this.state.position.width / 2)) {
-      console.log('dismissed');
+  _swiped (e, deltaX, deltaY, isFlick) {
+    if ((isFlick === true) || ((deltaX * -1) >= (this.state.position.width / 2))) {
       this.setState({
         isDismissing: true,
         isReverting: false,
@@ -49,7 +39,6 @@ class ListItem extends React.Component {
         }, 1000);
       });
     } else {
-      console.log('revert');
       this.setState({
         isDismissing: false,
         isReverting: true,
@@ -86,7 +75,7 @@ class ListItem extends React.Component {
       <Swipeable className={className}
                  onSwiping={this.swiping}
                  onSwiped={this.swiped} >
-        <div className="infinite-list-item" style={style} ref={(item) => {this.item = item;}}>
+        <div className="infinite-list-item" style={style} ref={(item) => {this.item = item;}} data-messageid={this.props.messageId}>
           <div className="author">
             <img className="author-image" src={`http://message-list.appspot.com/${this.props.author.photoUrl}`} />
             <div className="author-details">

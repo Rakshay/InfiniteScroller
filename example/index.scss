@@ -54,7 +54,7 @@ header {
 }
 
 .infinite-message-list {
-  padding: 15px;
+  padding: 0 15px 15px;
 }
 
 .list-item {
@@ -75,7 +75,7 @@ header {
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .27);
   left: 0;
-  margin: 0 auto 7px 0;
+  margin: 7px auto;
   padding: 15px;
   position: relative;
 }

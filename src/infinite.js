@@ -13,25 +13,15 @@ class InfiniteList extends React.Component {
       elements: this.buildElements(0, 20),
       isInfiniteLoading: false
     };
-
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    let shouldComponentUpdate = false;
-
-    if ((nextProps.containerHeight !== this.props.containerHeight) || (nextState.isInfiniteLoading !== this.state.isInfiniteLoading)) {
-      shouldComponentUpdate = true;
-    }
-
-    return shouldComponentUpdate;
-  }
 
   _buildElements (start, end) {
     let elements = [];
 
     for (let i = start; i < end; i++) {
       let message = this.props.getMessage(i);
-      elements.push(<ListItem key={i} {...message} />);
+      elements.push(<ListItem key={i} {...message} messageId={i} />);
     }
     return elements;
   }
@@ -39,9 +29,7 @@ class InfiniteList extends React.Component {
   _handleInfiniteLoad () {
     this.setState({
       isInfiniteLoading: true
-    });
-
-    setTimeout(() => {
+    }, () => {
       let elemLength = this.state.elements.length,
           newElements = this.buildElements(elemLength, elemLength + 100);
 
@@ -49,7 +37,7 @@ class InfiniteList extends React.Component {
         isInfiniteLoading: false,
         elements: this.state.elements.concat(newElements)
       });
-    }, 0);
+    });
   }
 
   elementInfiniteLoad () {

@@ -20,6 +20,35 @@ const mergeMessages = (currentMessages, newMessages) => {
   return currentMessages.concat(newMessages);
 };
 
+const fetchMessages = (messageCount, currentPageToken) => {
+  return new Promise((resolve, reject) => {
+    fetchMessage(currentPageToken)
+      .then((response) => {
+        let messages = response.data.messages,
+            pageToken = response.data.pageToken;
+        
+        if (messageCount > 100) {
+          fetchMessages((messageCount - 100), pageToken)
+            .then((messagesReponse) => {
+              messages = mergeMessages(messages, messagesReponse.messages);
+              resolve({
+                messages,
+                pageToken: messagesReponse.pageToken
+              });
+            });
+        } else {
+          resolve({
+            messages,
+            pageToken
+          });
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 class InfiniteScroller extends React.Component {
   constructor () {
     super();
@@ -34,41 +63,15 @@ class InfiniteScroller extends React.Component {
   }
 
   componentDidMount () {
-    let messages = [],
-        containerHeight = ReactDOM.findDOMNode(this.container).offsetHeight;
+    let containerHeight = ReactDOM.findDOMNode(this.container).offsetHeight;
 
-    fetchMessage(this.state.pageToken)
-      .then((response) => {
-        messages = response.data.messages;
-
-        if (response.data.pageToken !== undefined) {
-          fetchMessage(response.data.pageToken)
-            .then((response) => {
-              
-              if (response.data.pageToken !== undefined) {
-                messages = mergeMessages(messages, response.data.messages);
-
-                fetchMessage(response.data.pageToken)
-                  .then((response) => {
-                    this.setState({
-                      messages: mergeMessages(messages, response.data.messages),
-                      pageToken: response.data.pageToken,
-                      containerHeight
-                    });
-                  });
-              } else {
-                this.setState({
-                  messages: mergeMessages(messages, response.data.messages),
-                  containerHeight
-                });
-              }
-            });
-        } else {
-          this.setState({
-            messages,
-            containerHeight
-          });
-        }
+    fetchMessages(800)
+      .then((messagesReponse) => {
+        this.setState({
+          messages: messagesReponse.messages,
+          pageToken: messagesReponse.pageToken,
+          containerHeight
+        });  
       });
   }
 
@@ -77,24 +80,33 @@ class InfiniteScroller extends React.Component {
       this.setState({
         fetchingMessages: true
       }, () => {
-        fetchMessage(this.state.pageToken)
-          .then((response) => {
+        fetchMessages(300, this.state.pageToken)
+          .then((messagesReponse) => {
             this.setState({
-              messages: mergeMessages(this.state.messages, response.data.messages),
-              pageToken: response.data.pageToken,
+              messages: mergeMessages(this.state.messages, messagesReponse.messages),
+              pageToken: messagesReponse.pageToken,
               fetchingMessages: false
-            });
+            });  
           });
       });
     }
   }
 
   _getMessage (messageIndex) {
-    if (messageIndex > (this.state.messages.length - 250)) {
-      this.getMessages();
+    let message,
+        messageCount = this.state.messages.length;
+
+    if (messageIndex % 200 === 0) {
+      this.getMessages(messageIndex);
     }
 
-    return this.state.messages[messageIndex];
+    if (messageIndex < messageCount) {
+      message = this.state.messages[messageIndex];
+    } else {
+      message = this.state.messages[messageCount - 1];
+    }
+
+    return message;
   }
 
   render () {
