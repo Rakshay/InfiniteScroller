@@ -1,1 +1,51 @@
 @import './reset';
+
+$theme-color: #6739b7;
+$bg-color: #ededed;
+$white: #fff;
+$shadow-color: rgba(0, 0, 0, .35);
+
+html,
+body {
+  background: $bg-color;
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+header {
+  align-items: center;
+  background-color: $theme-color;
+  box-shadow: 0 3px 6px $shadow-color;
+  display: flex;
+  height: 55px;
+}
+
+.menu {
+  cursor: pointer;
+  padding: 20px 18px;
+
+  .menu-icon {
+    background-image: url('./menu.png');
+    height: 12px;
+    width: 18px;
+  }
+}
+
+.page-title {
+  color: $white;
+  flex: 1;
+  font-family: 'Roboto-Medium';
+  font-size: 20px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: scroll;
+}
