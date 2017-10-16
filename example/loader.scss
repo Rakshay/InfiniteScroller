@@ -1,0 +1,61 @@
+$white: #6739b7;
+
+%extend-1 {
+  animation: load1 1s infinite ease-in-out;
+  background: $white;
+  height: 4em;
+  width: 1em;
+}
+
+%extend-2 {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+
+
+.loading-indicator {
+  @extend %extend-1;
+  animation-delay: -.16s;
+  color: $white;
+  font-size: 11px;
+  margin: 88px auto;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+
+  &::before {
+    @extend %extend-1;
+    @extend %extend-2;
+    animation-delay: -.32s;
+    left: -1.5em;
+  }
+
+  &::after {
+    @extend %extend-1;
+    @extend %extend-2;
+    left: 1.5em;
+  }
+}
+
+@keyframes load1 {
+  0% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  80% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}

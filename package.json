@@ -18,9 +18,13 @@
   ],
   "dependencies": {
     "axios": "^0.16.2",
+    "classnames": "^2.2.5",
+    "moment": "^2.19.1",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-infinite": "^0.12.1"
+    "react-infinite": "^0.12.1",
+    "react-swipeable": "^4.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -51,6 +55,7 @@
     "buildDev:js:example": "cross-env NODE_ENV=development webpack --progress --watch --color",
     "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
     "buildDev:css:example": "node-sass example/index.scss example/index.build.css --watch --importer node_modules/node-sass-import",
+    "build:html:example": "vulcanize --inline-scripts --inline-css example/index.html > example/index.min.html",
     "postversion": "git push --tags origin HEAD"
   }
 }

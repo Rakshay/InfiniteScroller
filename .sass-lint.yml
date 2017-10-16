@@ -1,0 +1,3 @@
+files:
+  ignore:
+    - 'example/reset.scss'
