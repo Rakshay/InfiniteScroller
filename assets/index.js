@@ -8,5 +8,5 @@ import MessagesViewer from '../src';
 (() => {
   let messageListContainer = document.getElementById('message-list');
 
-  ReactDOM.render(React.createElement(MessagesViewer, {apiEndPoint: 'http://message-list.appspot.com/messages'}), messageListContainer);
+  ReactDOM.render(React.createElement(MessagesViewer, {apiEndPoint: 'https://message-list.appspot.com/messages'}), messageListContainer);
 })();

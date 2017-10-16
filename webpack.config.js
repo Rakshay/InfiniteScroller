@@ -1,3 +1,9 @@
+const webpack = require('webpack');
+
+var plugins = [];
+
+plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+
 module.exports = env => {
   return {
     entry: [
@@ -16,6 +22,7 @@ module.exports = env => {
         }
       }]
     },
+    plugins:plugins,
     devtool: 'inline-source-map'
   };
 };

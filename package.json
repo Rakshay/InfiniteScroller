@@ -48,10 +48,10 @@
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src/*",
     "lint:css": "sass-lint 'example/**/*.scss' -v",
-    "build": "npm-run-all build:js build:css",
+    "build": "npm-run-all build:js build:css build:html",
     "build:js": "cross-env NODE_ENV=development webpack --progress --color",
     "buildDev:js": "cross-env NODE_ENV=development webpack --progress --watch --color",
-    "build:css": "node-sass assets/index.scss assets/index.build.css --importer node_modules/node-sass-import",
+    "build:css": "node-sass assets/index.scss assets/index.build.css --output-style compressed --importer node_modules/node-sass-import",
     "buildDev:css": "node-sass assets/index.scss assets/index.build.css --watch --importer node_modules/node-sass-import",
     "build:html": "vulcanize --inline-scripts --inline-css assets/index.html > assets/index.min.html",
     "postversion": "git push --tags origin HEAD"
