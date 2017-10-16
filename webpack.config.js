@@ -1,10 +1,10 @@
 module.exports = env => {
   return {
     entry: [
-      './example/index.js'
+      './assets/index.js'
     ],
     output: {
-      filename: './example/index.build.js'
+      filename: './assets/index.build.js'
     },
     module: {
       loaders: [{

@@ -48,14 +48,12 @@
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint src/*",
     "lint:css": "sass-lint 'example/**/*.scss' -v",
-    "build": "npm-run-all build:js",
-    "build:example": "npm-run-all build:js:example build:css:example",
-    "build:js": "cross-env NODE_ENV=development babel src --out-dir dist",
-    "build:js:example": "cross-env NODE_ENV=development webpack --progress --color",
-    "buildDev:js:example": "cross-env NODE_ENV=development webpack --progress --watch --color",
-    "build:css:example": "node-sass example/index.scss example/index.build.css --importer node_modules/node-sass-import",
-    "buildDev:css:example": "node-sass example/index.scss example/index.build.css --watch --importer node_modules/node-sass-import",
-    "build:html:example": "vulcanize --inline-scripts --inline-css example/index.html > example/index.min.html",
+    "build": "npm-run-all build:js build:css",
+    "build:js": "cross-env NODE_ENV=development webpack --progress --color",
+    "buildDev:js": "cross-env NODE_ENV=development webpack --progress --watch --color",
+    "build:css": "node-sass assets/index.scss assets/index.build.css --importer node_modules/node-sass-import",
+    "buildDev:css": "node-sass assets/index.scss assets/index.build.css --watch --importer node_modules/node-sass-import",
+    "build:html": "vulcanize --inline-scripts --inline-css assets/index.html > assets/index.min.html",
     "postversion": "git push --tags origin HEAD"
   }
 }
